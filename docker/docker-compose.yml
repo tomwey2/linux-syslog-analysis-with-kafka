@@ -1,0 +1,32 @@
+version: '3'
+
+volumes:
+  data-mysql:
+    driver: local
+  grafana-storage: {}
+
+services:
+  syslog-database:
+    build: ./database
+    image: syslog-database
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: abcdef
+    container_name: syslog-database
+    volumes:
+      - data-mysql:/var/lib/mysql
+
+  syslog-grafana:
+    image: grafana/grafana-enterprise
+    ports:
+      - 3003:3000
+    extra_hosts:
+      - mariadbhost:172.17.0.1 # set here the IP address of the host where the database runs
+    depends_on:
+      - syslog-database
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./docker-grafana/datasources:/etc/grafana/provisioning/datasources/
+      - ./docker-grafana/dashboards:/etc/grafana/provisioning/dashboards/
+    container_name: syslog-grafana
