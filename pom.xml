@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>linux-syslog-kafka-producer</module>
+        <module>syslog-kafka-producer</module>
     </modules>
 
     <properties>

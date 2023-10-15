@@ -57,21 +57,20 @@ is trying to break into an account or might only mean that someone forgot their 
 ---
 
 ## Running the application
-
-### Running Kafka
-
-1. Open a terminal and start the zookeeper service.
+### Running Kafka as Docker container
+Open a terminal and run the docker container via the docker compose file.
    ```bash
-   bin/zookeeper-start.sh
+   cd docker/kafka
+   docker compose up -d
    ```
-1. Open a terminal and start the kafka service.
-   ```bash
-   bin/kafka-start.sh
+This starts the zookeaper and the kafka broker at localhost:9092.
+
+In order to check the communication a kafka consumer console can be started:
+ ```bash
+   ./kafka-consumer-console.sh log-raw-data
    ```
 
-### Running MariaDB and Grafana as Docker container
-
-### Running
+### Running the Syslog-Kafka-Producer
 
    ```bash
    curl -X POST localhost:8080/producer/upload --form 'file=@data/Linux_2k.log'
@@ -80,4 +79,6 @@ is trying to break into an account or might only mean that someone forgot their 
    ```bash
    curl -X POST localhost:8080/producer/message --form 'content=Hallo World!'
    ```
+
+### Running MariaDB and Grafana as Docker container
 
