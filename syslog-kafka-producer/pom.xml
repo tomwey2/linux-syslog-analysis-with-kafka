@@ -12,6 +12,7 @@
 
     <groupId>de.tomwey2.syslog.kafka</groupId>
     <artifactId>syslog-kafka-producer</artifactId>
+    <version>0.1.0</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
