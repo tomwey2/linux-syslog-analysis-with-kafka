@@ -20,7 +20,7 @@ flowchart TD
     idKafka[Apache Kafka]
     idDb[(Database)]
     idLog[log]
-    idProducer[log Producer]
+    idProducer[log \n Producer]
     idConsumer[db Consumer]
     idGrafana[Grafana]
     idWorker1[Worker 1]
