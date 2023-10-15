@@ -22,10 +22,8 @@ flowchart TD
     idKafka[----- Apache Kafka -----]
     idDb[(Database)]
     idLog[log]
-    idProducer[log 
-    Producer]
-    idConsumer[db 
-    Consumer]
+    idProducer[log \n Producer]
+    idConsumer[db \n Consumer]
     idGrafana[Grafana]
     idWorker1[Worker 1]
     idWorker2[Worker 2]
@@ -74,3 +72,14 @@ is trying to break into an account or might only mean that someone forgot their 
    ```
 
 ### Running MariaDB and Grafana as Docker container
+
+### Running
+
+   ```bash
+   curl -X POST localhost:8080/producer/upload --form 'file=@data/Linux_2k.log'
+   ```
+
+   ```bash
+   curl -X POST localhost:8080/producer/message --form 'content=Hallo World!'
+   ```
+

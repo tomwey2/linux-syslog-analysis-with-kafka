@@ -7,7 +7,7 @@ volumes:
 
 services:
   syslog-database:
-    build: ./database
+    build: .
     image: syslog-database
     ports:
       - 3306:3306
