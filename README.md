@@ -15,9 +15,6 @@ place in a Grafana dashboard that shows the time-lined data tabular and
 graphical.
 
 ```mermaid
----
-title: Flowchart Diagram of the PoC
----
 flowchart TD
     idKafka[----- Apache Kafka -----]
     idDb[(Database)]
