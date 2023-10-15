@@ -1,4 +1,4 @@
-package de.tomwey2.linux.syslog.kafka.producer;
+package de.tomwey2.syslog.kafka.producer.upload;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
