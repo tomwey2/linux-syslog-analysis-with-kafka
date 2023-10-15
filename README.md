@@ -13,6 +13,16 @@ a set of microservices that run in an apache kafka cluster.
 The analyzed data is stored in a MariaDB database. The monitoring takes
 place in a Grafana dashboard that shows the time-lined data tabular and 
 graphical.
+Here is a simple flow chart:
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+abc
 
 ```mermaid
 flowchart TD
