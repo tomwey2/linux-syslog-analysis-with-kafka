@@ -27,10 +27,10 @@ flowchart TD
     idWorker2[Worker 2]
     idWorkerN[Worker n]
     idLog --> idProducer --> idKafka
-    idKafka-->idWorker1-->idKafka
-    idKafka-->idWorker2-->idKafka
-    idKafka-->idWorkerN-->idKafka
-    idKafka-->idConsumer-->idDb-->idGrafana
+    idKafka --> idWorker1 --> idKafka
+    idKafka --> idWorker2 --> idKafka
+    idKafka --> idWorkerN --> idKafka
+    idKafka --> idConsumer --> idDb --> idGrafana
 ```
 
 The demonstrator shows an exemple with the
