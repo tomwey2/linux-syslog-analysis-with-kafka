@@ -21,12 +21,12 @@ flowchart TD
     idDb[(Database)]
     idLog[log]
     idProducer[log \n Producer]
-    idConsumer[db Consumer]
+    idConsumer[db \n Consumer]
     idGrafana[Grafana]
     idWorker1[Worker 1]
     idWorker2[Worker 2]
     idWorkerN[Worker n]
-    idLog-->idProducer-->idKafka
+    idLog --> idProducer --> idKafka
     idKafka-->idWorker1-->idKafka
     idKafka-->idWorker2-->idKafka
     idKafka-->idWorkerN-->idKafka
