@@ -16,17 +16,8 @@ graphical.
 Here is a simple flow chart:
 
 ```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
-abc
-
-```mermaid
 flowchart TD
-    idKafka[----- Apache Kafka -----]
+    idKafka[Apache Kafka]
     idDb[(Database)]
     idLog[log]
     idProducer[log Producer]
@@ -35,11 +26,11 @@ flowchart TD
     idWorker1[Worker 1]
     idWorker2[Worker 2]
     idWorkerN[Worker n]
-    idLog --> idProducer --> idKafka
-    idKafka --> idWorker1 --> idKafka
-    idKafka --> idWorker2 --> idKafka
-    idKafka --> idWorkerN --> idKafka
-    idKafka --> idConsumer --> idDb --> idGrafana
+    idLog-->idProducer-->idKafka
+    idKafka-->idWorker1-->idKafka
+    idKafka-->idWorker2-->idKafka
+    idKafka-->idWorkerN-->idKafka
+    idKafka-->idConsumer-->idDb-->idGrafana
 ```
 
 The demonstrator shows an exemple with the
