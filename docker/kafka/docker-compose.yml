@@ -30,4 +30,4 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       CONFLUENT_SUPPORT_CUSTOMER_ID: '4711'
       GROUP_ID: "syslog-kafka"
-      KAFKA_CREATE_TOPICS: "log-raw-data"
+      KAFKA_CREATE_TOPICS: "log-raw-data,failed-login-data"
