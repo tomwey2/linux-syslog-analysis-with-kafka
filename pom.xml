@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>syslog-kafka-producer</module>
+        <module>syslog-kafka-failedlogin-stream</module>
     </modules>
 
     <properties>
