@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>de.tomwey2.kafka</groupId>
-    <artifactId>syslog-kafka-failedlogin-stream</artifactId>
+    <artifactId>syslog-kafka-stream-failedlogin</artifactId>
     <version>0.1.0</version>
 
     <properties>

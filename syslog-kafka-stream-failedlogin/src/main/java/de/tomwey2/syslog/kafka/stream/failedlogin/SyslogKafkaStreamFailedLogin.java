@@ -2,38 +2,28 @@ package de.tomwey2.syslog.kafka.stream.failedlogin;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
-import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.Printed;
-import org.apache.kafka.streams.kstream.Produced;
-import org.apache.kafka.streams.processor.TimestampExtractor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ScopeMetadata;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.EnableKafkaStreams;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.KafkaStreamsDefaultConfiguration;
 import org.springframework.kafka.config.KafkaStreamsConfiguration;
-import org.springframework.messaging.handler.annotation.SendTo;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Properties;
 
 @SpringBootApplication
 @Slf4j
 @EnableKafka
 @EnableKafkaStreams
-public class SyslogKafkaFailedLoginStream {
+public class SyslogKafkaStreamFailedLogin {
 
     @Value(value = "${spring.kafka.bootstrap.servers}")
     private String bootstrapServers;
@@ -46,7 +36,7 @@ public class SyslogKafkaFailedLoginStream {
     String outputTopicName;
 
     public static void main(String[] args) {
-        SpringApplication.run(SyslogKafkaFailedLoginStream.class, args);
+        SpringApplication.run(SyslogKafkaStreamFailedLogin.class, args);
     }
 
     @Bean
