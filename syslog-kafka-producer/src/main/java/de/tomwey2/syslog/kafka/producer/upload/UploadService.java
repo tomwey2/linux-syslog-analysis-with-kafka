@@ -26,15 +26,15 @@ public class UploadService {
             BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
             String line;
             while ((line = reader.readLine()) != null) {
-                uploadMessage(line);
+                uploadMessage(file.getOriginalFilename(), line);
             }
         } catch (IOException e) {
             throw new UploadException(e.getMessage());
         }
     }
 
-    public void uploadMessage(final String message) {
+    public void uploadMessage(final String filename, final String message) {
         log.info("topic: {} message:{}", topic, message);
-        kafkaTemplate.send(topic, message);
+        kafkaTemplate.send(topic, filename, message);
     }
 }

@@ -34,7 +34,7 @@ public class UploadController {
             throw new UploadException("Message not valid");
         }
 
-        uploadService.uploadMessage(message);
+        uploadService.uploadMessage("line", message);
         return ResponseEntity.ok("Message sent at " + topic + ".\n");
     }
 

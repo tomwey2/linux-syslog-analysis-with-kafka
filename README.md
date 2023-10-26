@@ -22,22 +22,27 @@ applications, and servers. The following technology stack is used:
 The following flow chart shows this concept:
 
 ```mermaid
-flowchart TD
-    idKafka[Apache Kafka]
-    idDb[(Database)]
+flowchart
     idLog[[log files]]
-    idProducer[log \n Producer]
-    idConsumer[db \n Consumer]
-    idGrafana[Grafana]
-    idWorker1[Microservice 1]
-    idWorker2[Microservice 2]
-    idWorkerN[Microservice n]
+    idProducer[Producer]
     idLog --> idProducer
-    idProducer --> idKafka
-    idKafka --> idWorker1 --> idKafka
-    idKafka --> idWorker2 --> idKafka
-    idKafka --> idWorkerN --> idKafka
-    idKafka --> idConsumer --> idDb --> idGrafana
+    idWorker1[Stream 1]
+    idWorkerN[Stream n]
+    idConsumer[Consumer]
+    idDb[(Database)]
+    idGrafana[Grafana]
+    subgraph idKafka[Apache Kafka]
+        idTopicRaw[topic: raw data]
+        idTopicData1[topic: data 1]
+        idTopicDataN[topic: data n]
+    end
+    idConsumer --> idDb
+    idDb --> idGrafana
+    idProducer --> idTopicRaw
+    idTopicRaw --> idWorker1 --> idTopicData1
+    idTopicRaw --> idWorkerN --> idTopicDataN
+    idTopicData1 --> idConsumer
+    idTopicDataN --> idConsumer
 ```
 
 ## Example 

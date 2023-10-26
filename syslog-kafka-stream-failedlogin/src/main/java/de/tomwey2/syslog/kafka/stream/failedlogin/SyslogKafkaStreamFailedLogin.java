@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
+import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.Printed;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +15,7 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.EnableKafkaStreams;
 import org.springframework.kafka.annotation.KafkaStreamsDefaultConfiguration;
 import org.springframework.kafka.config.KafkaStreamsConfiguration;
+import org.springframework.kafka.support.serializer.JsonSerde;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,17 +42,20 @@ public class SyslogKafkaStreamFailedLogin {
     }
 
     @Bean
-    public KStream<String, String> kStream(StreamsBuilder kStreamBuilder) {
-        KStream<String, String> stream = kStreamBuilder.stream(inputTopicName);
-        stream
+    public KStream<String, FailedLoginEvent> kStream(StreamsBuilder kStreamBuilder) {
+        KStream<String, String> inStream = kStreamBuilder
+                .stream(inputTopicName, Consumed.with(Serdes.String(),Serdes.String()));
+
+        KStream<String, FailedLoginEvent> outStream = inStream
                 .mapValues(FailedLoginEventFactory::toFailedLoginEvent)
                 .filter((k, v) -> Objects.nonNull(v))
-                .mapValues(FailedLoginEventFactory::toJsonString)
-                .to(outputTopicName);
+                //.mapValues(FailedLoginEventFactory::toJsonString)
+                //.to(outputTopicName)
+                ;
 
-        stream.print(Printed.toSysOut());
-
-        return stream;
+        outStream.to(outputTopicName);
+        outStream.print(Printed.toSysOut());
+        return outStream;
     }
 
     @Bean(name = KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME)
@@ -59,7 +64,7 @@ public class SyslogKafkaStreamFailedLogin {
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, applicationId);
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
-        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, JsonSerde.class);
         props.put(StreamsConfig.DEFAULT_TIMESTAMP_EXTRACTOR_CLASS_CONFIG, LogDataTimeExtractor.class);
 
         return new KafkaStreamsConfiguration(props);
