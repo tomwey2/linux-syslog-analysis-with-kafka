@@ -13,7 +13,7 @@ public record FailedLoginEvent(
         String host,
         String user,
         int failureCount
-    ) implements Serializable {
+) implements Serializable {
     public long getTimestampMillis() {
         return timestamp().toEpochSecond(ZoneOffset.UTC) * 1000;
     }

@@ -20,7 +20,7 @@ public class FailedLoginEventFactory {
             .build();
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MMM dd HH:mm:ss", Locale.US);
     private static final String timestampRgx = "(?<timestamp>\\w{3}\\s{1,2}\\d{1,2} \\d{2}:\\d{2}:\\d{2})";
-    public static final String logDataRgx = ".*sshd.*: (?<message>[^;]+)(.*rhost=(?<host>[^\\s]+))?(.*user=(?<user>[^$]+))?";
+    public static final String logDataRgx = ".*sshd.*: (?<message>[^;]+).*logname=.*(rhost=(?<host>[^\\s]+)?)(.*user=(?<user>[^$]+))?";
     public static final Pattern pattern = Pattern.compile(timestampRgx + logDataRgx);
 
     public static FailedLoginEvent toFailedLoginEvent(final String logEntry) {
