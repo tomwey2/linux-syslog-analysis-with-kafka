@@ -1,9 +1,12 @@
 package de.tomwey2.syslog.kafka.consumer;
 
+import de.tomwey2.syslog.kafka.consumer.services.FailedLoginService;
+import de.tomwey2.syslog.kafka.consumer.services.SuccessLoginService;
 import de.tomwey2.syslog.kafka.data.FailedLoginEvent;
 import de.tomwey2.syslog.kafka.data.FailedLoginEventFactory;
 import de.tomwey2.syslog.kafka.data.SuccessLoginEvent;
 import de.tomwey2.syslog.kafka.data.SuccessLoginEventFactory;
+import lombok.AllArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +22,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SpringBootApplication
+@AllArgsConstructor
 public class SyslogKafkaConsumer {
+    private final SuccessLoginService successLoginService;
+    private final FailedLoginService failedLoginService;
+
     @Value(value = "${spring.kafka.bootstrap.servers}")
     private String bootstrapServers;
 
@@ -33,18 +40,18 @@ public class SyslogKafkaConsumer {
         SpringApplication.run(SyslogKafkaConsumer.class, args);
     }
 
-    @KafkaListener(id = "${spring.kafka.application.id}-1",
-            topics = "failed-login-data")
-    public void listen(String jsonString) {
+    @KafkaListener(id = "${spring.kafka.application.id}-1", topics = "failed-login-data")
+    public void listenFailedLoginEvent(String key, String jsonString) {
         FailedLoginEvent failedLoginEvent = FailedLoginEventFactory.fromJsonString(jsonString);
         System.out.println("failed-login-data ->" + failedLoginEvent);
+        failedLoginService.insert(key, failedLoginEvent);
     }
 
-    @KafkaListener(id = "${spring.kafka.application.id}-2",
-            topics = "success-login-data")
-    public void listen2(String jsonString) {
+    @KafkaListener(id = "${spring.kafka.application.id}-2", topics = "success-login-data")
+    public void listenSuccessLoginEvent(String key, String jsonString) {
         SuccessLoginEvent successLoginEvent = SuccessLoginEventFactory.fromJsonString(jsonString);
         System.out.println("success-login-data ->" + successLoginEvent);
+        successLoginService.insert(key, successLoginEvent);
     }
 
     @Bean
