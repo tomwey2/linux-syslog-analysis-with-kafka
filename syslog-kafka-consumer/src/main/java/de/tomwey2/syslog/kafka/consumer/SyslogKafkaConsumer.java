@@ -1,5 +1,9 @@
 package de.tomwey2.syslog.kafka.consumer;
 
+import de.tomwey2.syslog.kafka.data.FailedLoginEvent;
+import de.tomwey2.syslog.kafka.data.FailedLoginEventFactory;
+import de.tomwey2.syslog.kafka.data.SuccessLoginEvent;
+import de.tomwey2.syslog.kafka.data.SuccessLoginEventFactory;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,10 +33,18 @@ public class SyslogKafkaConsumer {
         SpringApplication.run(SyslogKafkaConsumer.class, args);
     }
 
-    @KafkaListener(id = "${spring.kafka.application.id}",
-            topics = "#{'${spring.kafka.input.topics}'.split(',')}")
-    public void listen(String in) {
-        System.out.println(in);
+    @KafkaListener(id = "${spring.kafka.application.id}-1",
+            topics = "failed-login-data")
+    public void listen(String jsonString) {
+        FailedLoginEvent failedLoginEvent = FailedLoginEventFactory.fromJsonString(jsonString);
+        System.out.println("failed-login-data ->" + failedLoginEvent);
+    }
+
+    @KafkaListener(id = "${spring.kafka.application.id}-2",
+            topics = "success-login-data")
+    public void listen2(String jsonString) {
+        SuccessLoginEvent successLoginEvent = SuccessLoginEventFactory.fromJsonString(jsonString);
+        System.out.println("success-login-data ->" + successLoginEvent);
     }
 
     @Bean

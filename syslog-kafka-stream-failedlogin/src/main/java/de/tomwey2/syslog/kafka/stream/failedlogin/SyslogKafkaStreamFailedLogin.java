@@ -1,5 +1,7 @@
 package de.tomwey2.syslog.kafka.stream.failedlogin;
 
+import de.tomwey2.syslog.kafka.data.FailedLoginEvent;
+import de.tomwey2.syslog.kafka.data.FailedLoginEventFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -49,8 +51,6 @@ public class SyslogKafkaStreamFailedLogin {
         KStream<String, FailedLoginEvent> outStream = inStream
                 .mapValues(FailedLoginEventFactory::toFailedLoginEvent)
                 .filter((k, v) -> Objects.nonNull(v))
-                //.mapValues(FailedLoginEventFactory::toJsonString)
-                //.to(outputTopicName)
                 ;
 
         outStream.to(outputTopicName);

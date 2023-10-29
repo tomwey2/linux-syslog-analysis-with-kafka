@@ -23,6 +23,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>de.tomwey2.kafka</groupId>
+            <artifactId>syslog-kafka-data</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>

@@ -1,6 +1,7 @@
-package de.tomwey2.syslog.kafka.stream.failedlogin;
+package de.tomwey2.syslog.kafka.data;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public record FailedLoginEvent(
         String user,
         int failureCount
 ) implements Serializable {
+    @JsonIgnore
     public long getTimestampMillis() {
         return timestamp().toEpochSecond(ZoneOffset.UTC) * 1000;
     }

@@ -1,5 +1,7 @@
 package de.tomwey2.syslog.kafka.stream.successlogin;
 
+import de.tomwey2.syslog.kafka.data.SuccessLoginEvent;
+import de.tomwey2.syslog.kafka.data.SuccessLoginEventFactory;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.streams.processor.TimestampExtractor;
 

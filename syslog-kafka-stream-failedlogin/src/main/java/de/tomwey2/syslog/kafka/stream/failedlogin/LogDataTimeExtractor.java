@@ -1,5 +1,7 @@
 package de.tomwey2.syslog.kafka.stream.failedlogin;
 
+import de.tomwey2.syslog.kafka.data.FailedLoginEvent;
+import de.tomwey2.syslog.kafka.data.FailedLoginEventFactory;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.streams.processor.TimestampExtractor;
 

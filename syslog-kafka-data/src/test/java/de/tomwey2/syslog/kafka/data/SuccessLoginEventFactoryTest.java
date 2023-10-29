@@ -1,4 +1,4 @@
-package de.tomwey2.syslog.kafka.stream.successlogin;
+package de.tomwey2.syslog.kafka.data;
 
 import org.junit.jupiter.api.Test;
 

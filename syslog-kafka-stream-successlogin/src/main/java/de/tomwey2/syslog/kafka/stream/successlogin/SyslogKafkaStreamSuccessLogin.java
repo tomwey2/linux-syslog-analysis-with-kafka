@@ -1,5 +1,7 @@
 package de.tomwey2.syslog.kafka.stream.successlogin;
 
+import de.tomwey2.syslog.kafka.data.SuccessLoginEvent;
+import de.tomwey2.syslog.kafka.data.SuccessLoginEventFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;

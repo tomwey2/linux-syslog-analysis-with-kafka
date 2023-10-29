@@ -13,6 +13,7 @@
         <module>syslog-kafka-stream-failedlogin</module>
         <module>syslog-kafka-consumer</module>
         <module>syslog-kafka-stream-successlogin</module>
+        <module>syslog-kafka-data</module>
     </modules>
 
     <properties>
