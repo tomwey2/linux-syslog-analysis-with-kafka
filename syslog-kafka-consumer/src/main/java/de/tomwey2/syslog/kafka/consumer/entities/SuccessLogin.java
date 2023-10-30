@@ -3,11 +3,13 @@ package de.tomwey2.syslog.kafka.consumer.entities;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class SuccessLogin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
