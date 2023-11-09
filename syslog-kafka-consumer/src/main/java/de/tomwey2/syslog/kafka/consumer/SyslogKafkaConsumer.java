@@ -9,6 +9,7 @@ import de.tomwey2.syslog.kafka.data.FailedLoginEventFactory;
 import de.tomwey2.syslog.kafka.data.SuccessLoginEvent;
 import de.tomwey2.syslog.kafka.data.SuccessLoginEventFactory;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SpringBootApplication
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SyslogKafkaConsumer {
     private final SuccessLoginService successLoginService;
     private final FailedLoginService failedLoginService;

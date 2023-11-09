@@ -16,6 +16,7 @@ public class SyslogService {
     }
 
     public Syslog insert(final String filename) {
+        System.out.println("insert: " + filename + "<-");
         Syslog syslog = new Syslog(null, filename);
         return repository.save(syslog);
     }
